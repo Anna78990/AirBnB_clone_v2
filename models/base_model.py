@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """Defines the BaseModel class."""
 from uuid import uuid4
-from datetime import  datetime
+from datetime import datetime
+
 
 class BaseModel:
     """Represents the BaseModel class"""
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel
-        
+
             Args:
                 - *args : unused
                 - **kwargs : key/value
@@ -22,7 +23,6 @@ class BaseModel:
                     self.__dict__[k] = datetime.strptime(v, timeform)
                 else:
                     self.__dict__[k] = v
-
 
     def save(self):
         """Update the public instance attribute updated_at"""
@@ -41,5 +41,3 @@ class BaseModel:
         dict["updated_at"] = self.updated_at.isoformat()
         dict["__class__"] = self.__class__.__name__
         return dict
-
-    
