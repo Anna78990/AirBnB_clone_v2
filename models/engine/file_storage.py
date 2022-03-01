@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Define a class FileStorage to store information"""
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -16,3 +17,20 @@ class FileStorage:
         """Set in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
+
+    def save(self):
+        """Serializes __objects to the JSON file"""
+        with open(self.__file_path, "w") as f:
+            sobj = {k: v.to_dict() for k, v in self.__objects.items()}
+            json.dump(sobj, f)
+
+    def reload(self):
+        """Deserializes the JSON file to __objects"""
+        try:
+            with open(self.__file_path, "r") as f:
+                list_obj = json.load(f)
+                for o in list_obj.values():
+                    cls_name = o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return

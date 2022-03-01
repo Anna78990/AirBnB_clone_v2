@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Defines the BaseModel class."""
+import models
 from uuid import uuid4
 from datetime import datetime
 
@@ -23,10 +24,13 @@ class BaseModel:
                     self.__dict__[k] = datetime.strptime(v, timeform)
                 else:
                     self.__dict__[k] = v
+        else:
+            models.storage.new(self)
 
     def save(self):
         """Update the public instance attribute updated_at"""
         self.updated_at = datetime.today()
+        models.storage.save()
 
     def __str__(self):
         """Return a representation of a BaseModel instance in a string"""
@@ -35,7 +39,6 @@ class BaseModel:
 
     def to_dict(self):
         """Return a dictionary containing all keys/values of __dict__"""
-        dict = {}
         dict = self.__dict__.copy()
         dict["created_at"] = self.created_at.isoformat()
         dict["updated_at"] = self.updated_at.isoformat()
