@@ -13,7 +13,7 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Define the command interpreter"""
-    
+
     prompt = '(hbnb) '
     file = None
     __classes = {
@@ -44,8 +44,9 @@ class HBNBCommand(cmd.Cmd):
             print(a.id)
         else:
             print("** class doesn't exist **")
-   
+
     def do_show(self, arg):
+        """Show an instance with class name and the id"""
         words = arg.split()
         if arg == "":
             print("** class name missing **")
@@ -61,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[inst])
 
     def do_destroy(self, arg):
+        """Destroy a instance with class name and id"""
         words = arg.split()
         if arg == "":
             print("** class name missing **")
@@ -77,7 +79,9 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def emptyline(self):
+        """Do nothing when emptyline is entered"""
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
