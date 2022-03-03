@@ -16,55 +16,55 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(b.id), type("abc"))
 
     def test_created_at(self):
-        """test for created_at attribute of base
+        """test for created_at attribute of BaseModel
         """
         b = BaseModel()
         d = datetime.now()
         self.assertEqual(str(b.created_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
 
     def test_updated_at(self):
-        """test for updated_at attribute of base
+        """test for updated_at attribute of BaseModel
         """
         b = BaseModel()
         d = datetime.now()
         self.assertEqual(str(b.updated_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
 
     def test_name(self):
-        """test for name attribute of base
+        """test for name attribute of BaseModel
         """
         b = BaseModel()
         b.name = "test"
         self.assertEqual(b.name, "test")
 
     def test_name2(self):
-        """test for name attribute of base
+        """test for name attribute of BaseModel
         """
         b = BaseModel()
         b.name = None
         self.assertEqual(b.name, None)
 
     def test_name3(self):
-        """test for name attribute of base
+        """test for name attribute of BaseModel
         """
         b = BaseModel()
         b.name = ""
         self.assertEqual(b.name, "")
 
     def test_name4(self):
-        """test for name attribute of base
+        """test for name attribute of BaseModel
         """
         b = BaseModel(name="b")
         self.assertEqual(b.name, "b")
 
     def test_my_number(self):
-        """test for my_number attribute of base
+        """test for my_number attribute of BaseModel
         """
         b = BaseModel()
         b.my_number = 1
         self.assertEqual(b.my_number, 1)
 
     def test_my_number2(self):
-        """test for my_number attribute of base
+        """test for my_number attribute of BaseModel
         """
         b = BaseModel(my_number=None)
         self.assertEqual(b.my_number, None)
@@ -80,39 +80,54 @@ class TestBaseModel(unittest.TestCase):
     """
 
     def test_to_dict(self):
-        """test for method to_dict of base
+        """test for method to_dict of BaseModel
         """
         b = BaseModel()
         bdic = b.to_dict()
         self.assertEqual(b.created_at.isoformat(), bdic['created_at'])
 
     def test_to_dict2(self):
-        """test for method to_dict of base
+        """test for method to_dict of BaseModel
         """
         b = BaseModel()
         bdic = b.to_dict()
         self.assertEqual(b.updated_at.isoformat(), bdic['updated_at'])
 
     def test_to_dict3(self):
-        """test for method to_dict of base
+        """test for method to_dict of BaseModel
         """
         b = BaseModel()
         bdic = b.to_dict()
         self.assertEqual(b.id, bdic['id'])
 
     def test_to_dict4(self):
-        """test for method to_dict of base
+        """test for method to_dict of BaseModel
         """
         b = BaseModel(name="b")
         bdic = b.to_dict()
         self.assertEqual(b.name, bdic['name'])
 
     def test_to_dict5(self):
-        """test for method to_dict of base
+        """test for method to_dict of BaseModel
         """
         b = BaseModel(my_number=1)
         bdic = b.to_dict()
         self.assertEqual(b.my_number, bdic['my_number'])
+
+    def test_str(self):
+        """test for method __str__ of BaseModel
+        """
+        b = BaseModel()
+        a = str(b.id)[0:5]
+        self.assertEqual(str(b)[0:18], "[BaseModel] ({}".format(a))
+
+    def test_init_kwargs(self):
+        """test for method __init__ of BaseModel by kwagrs
+        """
+        b = BaseModel(name="a", my_number=1)
+        bdic = b.to_dict()
+        a = BaseModel(**bdic)
+        self.assertEqual(a.id, b.id)
 
 if __name__ == "__main__":
     unittest.main()
