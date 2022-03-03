@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines the command interpreter"""
 import cmd
+import shlex
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -96,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """Updates an instance based on the class name
         and id by adding or updating attribute"""
-        words = arg.split()
+        words = shlex.split(arg)
         cls_name = words[0] if len(words) > 0 else None
         id = words[1] if len(words) > 1 else None
         attribute = words[2] if len(words) > 2 else None
@@ -117,14 +118,12 @@ class HBNBCommand(cmd.Cmd):
         if attribute is None:
             print("** attribute name missing **")
             return False
+        if value is None:
+            print("** value missing **")
+            return False
         if len(words) == 4:
-            if words[2] not in self.__classes[cls_name].__dict__.keys():
-                print("** value missing **")
-            else:
-                if type(value) == str:
-                    value = '{}'.format(value[1:-1])
-                setattr(storage.all()[obj], attribute, words[3])
-                storage.save()
+            setattr(storage.all()[obj], attribute, value)
+            storage.save()
 
     def emptyline(self):
         """Do nothing when emptyline is entered"""
