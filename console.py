@@ -125,7 +125,6 @@ class HBNBCommand(cmd.Cmd):
                     value = '{}'.format(value[1:-1])
                 setattr(storage.all()[obj], attribute, words[3])
                 storage.save()
-            
 
     def emptyline(self):
         """Do nothing when emptyline is entered"""
