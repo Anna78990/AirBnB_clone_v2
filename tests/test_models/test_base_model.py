@@ -40,8 +40,34 @@ class TestBaseModel(unittest.TestCase):
         """test for name attribute of base
         """
         b = BaseModel()
+        b.name = None
+        self.assertEqual(b.name, None)
+
+    def test_name3(self):
+        """test for name attribute of base
+        """
+        b = BaseModel()
         b.name = ""
         self.assertEqual(b.name, "")
+
+    def test_name4(self):
+        """test for name attribute of base
+        """
+        b = BaseModel(name="b")
+        self.assertEqual(b.name, "b")
+
+    def test_my_number(self):
+        """test for my_number attribute of base
+        """
+        b = BaseModel()
+        b.my_number = 1
+        self.assertEqual(b.my_number, 1)
+
+    def test_my_number(self):
+        """test for my_number attribute of base
+        """
+        b = BaseModel(my_number=None)
+        self.assertEqual(b.my_number, None)
 
 if __name__ == "__main__":
     unittest.main()
