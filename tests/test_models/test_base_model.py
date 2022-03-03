@@ -63,11 +63,56 @@ class TestBaseModel(unittest.TestCase):
         b.my_number = 1
         self.assertEqual(b.my_number, 1)
 
-    def test_my_number(self):
+    def test_my_number2(self):
         """test for my_number attribute of base
         """
         b = BaseModel(my_number=None)
         self.assertEqual(b.my_number, None)
+
+    """def test_method_save(self):
+        b = BaseModel()
+        time.sleep(60)
+        b.save()
+        up = b.updated_at
+        d = datetime.now()
+        self.assertEqual(str(up)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+    *** il faut trop de temps a lancer donc decommentaire a la fin
+    """
+
+    def test_to_dict(self):
+        """test for method to_dict of base
+        """
+        b = BaseModel()
+        bdic = b.to_dict()
+        self.assertEqual(b.created_at.isoformat(), bdic['created_at'])
+
+    def test_to_dict2(self):
+        """test for method to_dict of base
+        """
+        b = BaseModel()
+        bdic = b.to_dict()
+        self.assertEqual(b.updated_at.isoformat(), bdic['updated_at'])
+
+    def test_to_dict3(self):
+        """test for method to_dict of base
+        """
+        b = BaseModel()
+        bdic = b.to_dict()
+        self.assertEqual(b.id, bdic['id'])
+
+    def test_to_dict4(self):
+        """test for method to_dict of base
+        """
+        b = BaseModel(name="b")
+        bdic = b.to_dict()
+        self.assertEqual(b.name, bdic['name'])
+
+    def test_to_dict5(self):
+        """test for method to_dict of base
+        """
+        b = BaseModel(my_number=1)
+        bdic = b.to_dict()
+        self.assertEqual(b.my_number, bdic['my_number'])
 
 if __name__ == "__main__":
     unittest.main()
