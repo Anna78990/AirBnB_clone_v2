@@ -2,44 +2,46 @@
 """ Unittest of Base class"""
 
 import unittest
-from models.base_model import Base
+from datetime import datetime
+import time
+from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """ Test of class Base """
 
     def test_id(self):
-        """test method for id of BaseModel
+        """test for id attribute of BaseModel
         """
         b = BaseModel()
-        self.assertEqual(type(b.id), type("abc")
+        self.assertEqual(type(b.id), type("abc"))
 
-    def test_method_created_at(self):
-        """test method for created_at of base
+    def test_created_at(self):
+        """test for created_at attribute of base
         """
         b = BaseModel()
         d = datetime.now()
         self.assertEqual(str(b.created_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
 
-    def test_method_updated_at(self):
-        """test method for updated_at of base
+    def test_updated_at(self):
+        """test for updated_at attribute of base
         """
         b = BaseModel()
+        d = datetime.now()
+        self.assertEqual(str(b.updated_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
 
-    def test_save_to_file2(self):
-        """test method save to file
+    def test_name(self):
+        """test for name attribute of base
         """
-        Rectangle.save_to_file([])
-        with open("Rectangle.json", "r") as file:
-            f = file.read()
-        self.assertEqual(f, "[]")
+        b = BaseModel()
+        b.name = "test"
+        self.assertEqual(b.name, "test")
 
-    def test_save_to_file2(self):
-        """test method save to file
+    def test_name2(self):
+        """test for name attribute of base
         """
-        Square.save_to_file([])
-        with open("Square.json", "r") as file:
-            f = file.read()
-        self.assertEqual(f, "[]")
+        b = BaseModel()
+        b.name = ""
+        self.assertEqual(b.name, "")
 
 if __name__ == "__main__":
     unittest.main()
