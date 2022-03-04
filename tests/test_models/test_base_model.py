@@ -6,6 +6,7 @@ from datetime import datetime
 import time
 from models.base_model import BaseModel
 
+
 class TestBaseModel(unittest.TestCase):
     """ Test of class BaseModel """
 
@@ -20,14 +21,16 @@ class TestBaseModel(unittest.TestCase):
         """
         b = BaseModel()
         d = datetime.now()
-        self.assertEqual(str(b.created_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(b.created_at)[0:-10], dst)
 
     def test_updated_at(self):
         """test for updated_at attribute of BaseModel
         """
         b = BaseModel()
         d = datetime.now()
-        self.assertEqual(str(b.updated_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(b.updated_at)[0:-10], dst)
 
     def test_name(self):
         """test for name attribute of BaseModel
@@ -136,6 +139,7 @@ class TestBaseModel(unittest.TestCase):
         bdic = b.to_dict()
         a = BaseModel(**bdic)
         self.assertEqual(a.created_at, b.created_at)
+
 
 if __name__ == "__main__":
     unittest.main()

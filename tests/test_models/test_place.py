@@ -6,6 +6,7 @@ from datetime import datetime
 import time
 from models.place import Place
 
+
 class TestPlace(unittest.TestCase):
     """ Test of class Place """
 
@@ -20,14 +21,16 @@ class TestPlace(unittest.TestCase):
         """
         p = Place()
         d = datetime.now()
-        self.assertEqual(str(p.created_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(p.created_at)[0:-10], dst)
 
     def test_updated_at(self):
         """test for updated_at attribute of Place
         """
         p = Place()
         d = datetime.now()
-        self.assertEqual(str(p.updated_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(p.updated_at)[0:-10], dst)
 
     def test_city_id(self):
         """test for city_id attribute of Place
@@ -189,6 +192,7 @@ class TestPlace(unittest.TestCase):
         pdic = p.to_dict()
         c = Place(**pdic)
         self.assertEqual(p.name, c.name)
+
 
 if __name__ == "__main__":
     unittest.main()

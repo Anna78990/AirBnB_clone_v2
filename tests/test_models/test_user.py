@@ -6,6 +6,7 @@ from datetime import datetime
 import time
 from models.user import User
 
+
 class TestUser(unittest.TestCase):
     """ Test of class User """
 
@@ -20,14 +21,16 @@ class TestUser(unittest.TestCase):
         """
         u = User()
         d = datetime.now()
-        self.assertEqual(str(u.created_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(u.created_at)[0:-10], dst)
 
     def test_updated_at(self):
         """test for updated_at attribute of User
         """
         u = User()
         d = datetime.now()
-        self.assertEqual(str(u.updated_at)[0:-10], d.strftime('%Y-%m-%d %H:%M'))
+        dst = d.strftime('%Y-%m-%d %H:%M')
+        self.assertEqual(str(u.updated_at)[0:-10], dst)
 
     def test_email(self):
         """test for email attribute of User
@@ -105,6 +108,7 @@ class TestUser(unittest.TestCase):
         udic = u.to_dict()
         c = User(**udic)
         self.assertEqual(u.email, c.email)
+
 
 if __name__ == "__main__":
     unittest.main()
