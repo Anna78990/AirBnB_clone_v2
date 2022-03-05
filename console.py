@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         elif words[0] not in self.__classes:
             print("** class doesn't exist **")
         elif len(words) < 2:
-            print("** instance is missing **")
+            print("** instance id missing **")
         else:
             inst = "{}.{}".format(words[0], words[1])
             if inst not in storage.all():
