@@ -40,7 +40,7 @@ class BaseModel:
     def to_dict(self):
         """Return a dictionary containing all keys/values of __dict__"""
         dict = self.__dict__.copy()
+        dict["__class__"] = self.__class__.__name__
         dict["created_at"] = self.created_at.isoformat()
         dict["updated_at"] = self.updated_at.isoformat()
-        dict["__class__"] = self.__class__.__name__
         return dict
