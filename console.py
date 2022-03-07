@@ -143,8 +143,16 @@ class HBNBCommand(cmd.Cmd):
             elif (arg[1][0:7] == "destroy"):
                 new_arg = arg[1][8:-1]
                 self.do_destroy("{} {}".format(arg[0], new_arg))
-        if (arg[0] == "s" and arg[1] == "a"):
-            print("default")
+            elif (arg[1][0:6] == "update"):
+                new_arg = arg[1][7:-1]
+                li = new_arg.split("\"")
+                li_ap = []
+                for i in li:
+                    if i != '' and i != ", ":
+                        li_ap.append(i)
+                args = ' '.join(li_ap)
+                print(args)
+                self.do_update("{} {}".format(arg[0], str(args)))
 
     def emptyline(self):
         """Do nothing when emptyline is entered"""
