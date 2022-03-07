@@ -125,6 +125,27 @@ class HBNBCommand(cmd.Cmd):
             setattr(storage.all()[obj], attribute, value)
             storage.save()
 
+    def default(self, line):
+        """Called when an unknown command is entered."""
+        arg = line.split(".")
+        if len(arg) > 0 and arg[0] in self.__classes:
+            if (arg[1] == "all()"):
+                self.do_all(arg[0])
+            elif (arg[1] == "count()"):
+                i = 0
+                for obj in storage.all().values():
+                    if arg[0] == obj.__class__.__name__:
+                        i += 1
+                print(i)
+            elif (arg[1][0:4] == "show"):
+                new_arg = arg[1][5:-1]
+                self.do_show("{} {}".format(arg[0], new_arg))
+            elif (arg[1][0:7] == "destroy"):
+                new_arg = arg[1][8:-1]
+                self.do_destroy("{} {}".format(arg[0], new_arg))
+        if (arg[0] == "s" and arg[1] == "a"):
+            print("default")
+
     def emptyline(self):
         """Do nothing when emptyline is entered"""
         pass
