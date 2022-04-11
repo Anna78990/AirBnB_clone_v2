@@ -2,6 +2,7 @@
 """Defines the command interpreter"""
 import cmd
 import shlex
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -37,12 +38,21 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         'Create command to create a new instance'
+
+        default_string = "{}=\"{}\""
         if arg == "":
             print("** class name missing **")
         elif arg in self.__classes:
             a = self.__classes[arg]()
             storage.save()
             print(a.id)
+            for i in args:
+                defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
+                if defStr:
+                    while j != "=":
+                        key_name = i[j]
+                    for key in a.all:
+                        if key_name == key
         else:
             print("** class doesn't exist **")
 
