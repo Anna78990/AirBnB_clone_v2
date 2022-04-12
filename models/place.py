@@ -23,7 +23,7 @@ class Place(BaseModel, Base):
         - longitude (float): longitude of the place
         - amenity_ids (list): list of amenity's ids
         """
-
+    __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities_id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
