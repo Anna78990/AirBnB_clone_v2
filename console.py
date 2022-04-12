@@ -44,8 +44,6 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if args[0] in self.__classes:
             a = self.__classes[args[0]]()
-            storage.save()
-            print(a.id)
             for i in args:
                 defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
                 if defStr:
@@ -60,6 +58,8 @@ class HBNBCommand(cmd.Cmd):
                     a.key[0] = key[1]
                 else:
                     pass
+            storage.save()
+            print(a.id)
         else:
             print("** class doesn't exist **")
 
