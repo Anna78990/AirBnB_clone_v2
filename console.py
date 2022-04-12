@@ -65,7 +65,6 @@ class HBNBCommand(cmd.Cmd):
             print(a.id)
         else:
             print("** class doesn't exist **")
-
     def do_show(self, arg):
         """Show an instance with class name and the id"""
         words = arg.split()
