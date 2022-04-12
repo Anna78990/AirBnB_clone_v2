@@ -47,17 +47,19 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
             print(a.id)
             for i in args:
-                defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
+                defStr = re.match(r"(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
                 if defStr:
                     key = i.split("=")
-                    key.replace("_", " ")
-                    num = re.search("{0-9}+")
+                    key[1].replace("_", " ")
+                    num = re.search("{0-9}+", key[1])
                     if num:
                         num = int(num)
-                    floatnum = re.search("{0-9}+{.}{0-9}+")
+                    floatnum = re.search("{0-9}+{.}{0-9}+", key[1])
                     if floatnum:
                         floatnum = float(floatnum)
                     a.key[0] = key[1]
+                else:
+                    pass
         else:
             print("** class doesn't exist **")
 
