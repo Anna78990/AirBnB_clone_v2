@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Define a class Place"""
-from msilib.schema import ComboBox
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import relationship
@@ -24,7 +23,7 @@ class Place(BaseModel, Base):
         - longitude (float): longitude of the place
         - amenity_ids (list): list of amenity's ids
         """
-
+    __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities_id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     name = Column(String(128), nullable=False)
@@ -36,3 +35,4 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     amenity_ids = []
+
