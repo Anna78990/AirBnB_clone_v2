@@ -57,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
                         floatnum = float(floatnum)
                     a.key[0] = key[1]
                 else:
-                    pass
+                    continue
             storage.save()
             print(a.id)
         else:
