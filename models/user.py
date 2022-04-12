@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Define the class User"""
 from models.base_model import BaseModel
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """Represents a User:
 
     Attributes:
@@ -12,8 +14,8 @@ class User(BaseModel):
         - first_name (str): first name of the user
         - last_name (str): last_name of the user
     """
-
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    __tablename__ = "users"
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
