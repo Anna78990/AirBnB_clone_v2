@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
             print(a.id)
             for i in args:
-                defStr = re.match(r"(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
+                defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
                 if defStr:
                     key = i.split("=")
                     key[1].replace("_", " ")
