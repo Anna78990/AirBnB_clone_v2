@@ -3,6 +3,7 @@
 import cmd
 import shlex
 import re
+import sys
 from models.base_model import BaseModel
 from models.user import User
 from models.city import City
@@ -38,21 +39,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         'Create command to create a new instance'
-
-        default_string = "{}=\"{}\""
         if arg == "":
             print("** class name missing **")
-        elif arg in self.__classes:
-            a = self.__classes[arg]()
+        args = arg.split(" ")
+        if args[0] in self.__classes:
+            a = self.__classes[args[0]]()
             storage.save()
             print(a.id)
             for i in args:
                 defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
                 if defStr:
-                    while j != "=":
-                        key_name = i[j]
-                    for key in a.all:
-                        if key_name == key
+                    key = i.split("=")
+                    key.replace("_", " ")
+                    num = re.search("{0-9}+")
+                    if num:
+                        num = int(num)
+                    floatnum = re.search("{0-9}+{.}{0-9}+")
+                    if floatnum:
+                        floatnum = float(floatnum)
+                    a.key[0] = key[1]
         else:
             print("** class doesn't exist **")
 
