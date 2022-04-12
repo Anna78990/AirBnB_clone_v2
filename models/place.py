@@ -11,7 +11,7 @@ class Place(BaseModel, Base):
     """Represent a place
 
     Attributes:
-        - __tablenames__ (str): name of the MySql table 
+        - __tablenames__ (str): name of the MySql table
         - city_id (str): id of the city
         - user_id (str): id of the user
         - name (str): name of the state
