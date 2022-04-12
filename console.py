@@ -44,11 +44,10 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if args[0] in self.__classes:
             a = self.__classes[args[0]]()
-            dic = {}
             for i in args:
-                defStr = re.match("(^{A-Z}*{a-z}*{0-9}*{=}{\"}\
-                        {A-Z}*{a-z}*{0-9}*{\"}$)", i)
-                if defStr:
+                if i in self.__classes:
+                    continue
+                else:
                     key = i.split("=")
                     key[1].replace("_", " ")
                     num = re.search("{0-9}+", key[1])
@@ -57,14 +56,15 @@ class HBNBCommand(cmd.Cmd):
                     floatnum = re.search("{0-9}+{.}{0-9}+", key[1])
                     if floatnum:
                         floatnum = float(floatnum)
-                    dic[key[0]] = key[1]
-                else:
-                    continue
+                    if key[1][0:1] == '"':
+                        key[1] = key[1][1:-1]
+                        setattr(a, key[0], key[1])
             storage.new(a)
             storage.save()
             print(a.id)
         else:
             print("** class doesn't exist **")
+
     def do_show(self, arg):
         """Show an instance with class name and the id"""
         words = arg.split()

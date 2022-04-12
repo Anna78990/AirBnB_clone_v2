@@ -1,0 +1,32 @@
+    def do_create(self, arg):
+        'Create command to create a new instance'
+        if arg == "":
+            print("** class name missing **")
+        args = arg.split(" ")
+        if args[0] in self.__classes:
+            dic = {}
+            for i in args:
+                if i in self.__classes:
+                    continue
+                else:
+                    key = i.split("=")
+                    key[1].replace("_", " ")
+                    num = re.search("{0-9}+", key[1])
+                    if num:
+                        num = int(num)
+                    floatnum = re.search("{0-9}+{.}{0-9}+", key[1])
+                    if floatnum:
+                        floatnum = float(floatnum)
+                    if key[1][0:1] == '"':
+                        key[1] = key[1][1:-1]
+                    dic[key[0]] = key[1]
+            a = self.__classes[args[0]](**dic)
+            storage.new(a)
+            storage.save()
+            print(a.id)
+        else:
+            print("** class doesn't exist **")
+
+
+	    (hbnb) ["[Place] (4a0fb80b-df28-46a7-acb0-d84bb5ed1d20) {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x7ff111f0a280>, 'id': '4a0fb80b-df28-46a7-acb0-d84bb5ed1d20', 'created_at': datetime.datetime(2022, 4, 12, 16, 52, 15, 284772), 'updated_at': datetime.datetime(2022, 4, 12, 16, 52, 15, 284783), 'city_id': [], 'user_id': [], 'name': [], 'number_rooms': '4', 'number_bathrooms': '2', 'max_guest': '10', 'price_by_night': '300', 'latitude': '37.773972', 'longitude': '-122.431297'}", "[Place] (ae0081ce-624f-4ad8-ab33-e85bbb4a12f8) {'_sa_instance_state': <sqlalchemy.orm.state.InstanceState object at 0x7ff111e8bc10>, 'id': 'ae0081ce-624f-4ad8-ab33-e85bbb4a12f8', 'created_at': datetime.datetime(2022, 4, 12, 16, 54, 40, 912360), 'updated_at': datetime.datetime(2022, 4, 12, 16, 54, 40, 912367), 'city_id': '0001', 'user_id': '0001', 'name': 'My_little_house', 'number_rooms': '4', 'number_bathrooms': '2', 'max_guest': '10', 'price_by_night': '300', 'latitude': '37.773972', 'longitude': '-122.431297'}"]
+
