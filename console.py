@@ -44,6 +44,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if args[0] in self.__classes:
             a = self.__classes[args[0]]()
+            dic = {}
             for i in args:
                 defStr = re.match("(^{A-Z}*{a-z}*{=}{\"}{A-Z}*{a-z}*{\"}$)", i)
                 if defStr:
@@ -55,10 +56,10 @@ class HBNBCommand(cmd.Cmd):
                     floatnum = re.search("{0-9}+{.}{0-9}+", key[1])
                     if floatnum:
                         floatnum = float(floatnum)
-                    a.key[0] = key[1]
+                    dic[key[0]] = key[1]
                 else:
                     continue
-            storage.save()
+            a.save()
             print(a.id)
         else:
             print("** class doesn't exist **")
