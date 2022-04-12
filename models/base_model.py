@@ -47,13 +47,12 @@ class BaseModel:
 
     def to_dict(self):
         """Return a dictionary containing all keys/values of __dict__"""
-        dict = self.__dict__.copy()
-        dict["__class__"] = self.__class__.__name__
-        dict["created_at"] = self.created_at.isoformat()
-        dict["updated_at"] = self.updated_at.isoformat()
-        if dict["_sa_instance_state"]:
-            del dict["_sa_instance_state"]
-        return dict
+        my_dict = self.__dict__.copy()
+        my_dict["__class__"] = self.__class__.__name__
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
+        my_dict.pop("_sa_instance_state", None)
+        return my_dict
 
     def delete(self):
         """ Delete the current instance from the storage"""

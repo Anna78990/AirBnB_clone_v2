@@ -38,7 +38,7 @@ class DBStorage:
     def all(self, cls=None):
         """Return a dictionary of objects """
         if cls != None:
-            objects = self.__session.query(type(cls))
+            objects = self.__session.query(self.classes()[cls])
         else:
             objects =  self.__session.query(User).all()
             objects +=  self.__session.query(State).all()
@@ -68,3 +68,6 @@ class DBStorage:
         Session = scoped_session(session_factory)
         self.__session = Session()
 
+    def close(self):
+        """ Close the session"""
+        self.__session.close()
