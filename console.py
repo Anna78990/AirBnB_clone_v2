@@ -50,15 +50,17 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     key = i.split("=")
                     key[1].replace("_", " ")
-                    num = re.search("{0-9}+", key[1])
-                    if num:
-                        num = int(num)
-                    floatnum = re.search("{0-9}+{.}{0-9}+", key[1])
-                    if floatnum:
-                        floatnum = float(floatnum)
                     if key[1][0:1] == '"':
                         key[1] = key[1][1:-1]
                         setattr(a, key[0], key[1])
+                    else:
+                        num = float(key[1])
+                        if num.is_integer() == True:
+                            key[1] = int(key[1])
+                            setattr(a, key[0], key[1])
+                        else:
+                            key[1] = float(key[1])
+                            setattr(a, key[0], key[1])
             storage.new(a)
             storage.save()
             print(a.id)
