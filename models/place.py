@@ -4,7 +4,10 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy import Table
-from models.city import City
+import models
+from models.review import Review
+from models.amenity import Amenity
+from os import getenv
 
 
 class Place(BaseModel, Base):
@@ -36,7 +39,8 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
-    amenities = relationship("Amenity", back_populates="place_amenities")
+    amenities = relationship("Amenity", secondary="place_amenity",
+                             viewonly=False)
 
     metadata = Base.metadata
     place_amenity = Table('place_amenity', metadata,
@@ -47,5 +51,22 @@ class Place(BaseModel, Base):
                                  ForeignKey("amenities.id"),
                                  nullable=False, primary_key=True))
 
-    def amenities(self):
-        return self.amenities
+    if getenv("HBNB_TYPE_STORAGE", None) != "db":
+        @property
+        def reviews(self):
+            """ Getter in case of file storage """
+            return [review for review in models.storage.all(Review)
+                    if review.state_id == self.id]
+
+
+        @property
+        def amenities(self):
+            """ Getter in case of file storage """
+            return [amenity for amenity in models.storage.all(Amenity)
+                    if amenity.id in self.amenity_ids]
+
+        @amenities.getter
+        def amenities(self, obj):
+            """ Setter in case of file storage"""
+            if type(obj) == Amenity():
+                self.amenity_ids.append(obj)
