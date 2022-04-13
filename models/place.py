@@ -39,8 +39,7 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
-    amenities = relationship("Amenity", secondary="place_amenity",
-                             viewonly=False)
+
 
     metadata = Base.metadata
     place_amenity = Table('place_amenity', metadata,
