@@ -50,11 +50,11 @@ class HBNBCommand(cmd.Cmd):
                     continue
                 else:
                     key = i.split("=")
-                    key[1].replace("_", " ")
                     if a_att.__contains__(key[0]) is True:
                         if key[1][0:1] == '"':
                             key[1] = key[1][1:-1]
-                            key[1].replace('"', '\"')
+                            key[1] = key[1].replace("_", " ")
+                            key[1] = key[1].replace('"', '\"')
                             setattr(a, key[0], key[1])
                         else:
                             num = float(key[1])
