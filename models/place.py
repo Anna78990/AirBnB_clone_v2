@@ -35,4 +35,26 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+    amenities = relationship("Amenity", back_populates="place_amenities")
+
+    metadata = Base.metadata
+    place_amenity = Table('place_amenity', metadata,
+        Column(
+            "place_id", String(60), ForeignKey("places.id"),
+            nullable=False, primary_key=True
+            ),
+        Column(
+            "amenity_id", String(60), ForeignKey("amenities.id"),
+            nullable=False, primary_key=True
+            )
+            )
+
+    def amenities(self):
+        return amenities
+
+    def amenities(self, amenities):
+        if isinstance(Amenity, amenities):
+            amenity_ids.append(amenities)
+        else:
+            continue
 
