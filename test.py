@@ -25,3 +25,7 @@ print("-----------")
 print("longitude.is_integer() = {}".format(n.is_integer()))
 print("alt.is_integer() = {}".format(at.is_integer()))
 print("price.is_integer() = {}".format(p.is_integer()))
+l = ['user', 'id']
+a = "user"
+print("containtest")
+print(l.__contains__(a))

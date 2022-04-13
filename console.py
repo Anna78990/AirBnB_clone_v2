@@ -44,23 +44,26 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if args[0] in self.__classes:
             a = self.__classes[args[0]]()
+            a_att = dir(a)
             for i in args:
                 if i in self.__classes:
                     continue
                 else:
                     key = i.split("=")
                     key[1].replace("_", " ")
-                    if key[1][0:1] == '"':
-                        key[1] = key[1][1:-1]
-                        setattr(a, key[0], key[1])
-                    else:
-                        num = float(key[1])
-                        if num.is_integer() == True:
-                            key[1] = int(key[1])
+                    if a_att.__contains__(key[0]) is True:
+                        if key[1][0:1] == '"':
+                            key[1] = key[1][1:-1]
+                            key[1].replace('"', '\"')
                             setattr(a, key[0], key[1])
                         else:
-                            key[1] = float(key[1])
-                            setattr(a, key[0], key[1])
+                            num = float(key[1])
+                            if num.is_integer() is True:
+                                key[1] = int(key[1])
+                                setattr(a, key[0], key[1])
+                            else:
+                                key[1] = float(key[1])
+                                setattr(a, key[0], key[1])
             storage.new(a)
             storage.save()
             print(a.id)
