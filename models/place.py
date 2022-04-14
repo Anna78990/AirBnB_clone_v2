@@ -14,7 +14,7 @@ class Place(BaseModel, Base):
     """Represent a place
 
     Attributes:
-        - __tablenames__ (str): name of the MySql table
+        - __tablename__ (str): name of the MySql table
         - city_id (str): id of the city
         - user_id (str): id of the user
         - name (str): name of the state
@@ -27,6 +27,7 @@ class Place(BaseModel, Base):
         - longitude (float): longitude of the place
         - amenity_ids (list): list of amenity's ids
         - reviews (relationship): relationship between Place and Review classes
+        - amenities (relationship): relationship between Amenity, place_amenity and places
         """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -41,7 +42,7 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     amenity_ids = []
     reviews = relationship("Review", backref="place", cascade="delete")
-
+    amenities = relationship("Amenity", "place_amenity", viewonly=False)
 
     metadata = Base.metadata
     place_amenity = Table('place_amenity', metadata,

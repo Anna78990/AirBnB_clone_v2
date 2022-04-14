@@ -9,6 +9,7 @@ class Review(BaseModel, Base):
     """Represent a rewiew
 
     Attributes:
+        - __tablename__(table) = represents the table name, reviews
         - place_id (str) = id of the place
         - user_id (str) = id of the place
         - text (str) = text of the review
