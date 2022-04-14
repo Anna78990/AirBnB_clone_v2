@@ -27,7 +27,8 @@ class Place(BaseModel, Base):
         - longitude (float): longitude of the place
         - amenity_ids (list): list of amenity's ids
         - reviews (relationship): relationship between Place and Review classes
-        - amenities (relationship): relationship between Amenity, place_amenity and places
+        - amenities (relationship): relationship between Amenity,
+                                    place_amenity and places
         """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -59,7 +60,6 @@ class Place(BaseModel, Base):
             """ Getter in case of file storage """
             return [review for review in models.storage.all(Review)
                     if review.state_id == self.id]
-
 
         @property
         def amenities(self):
