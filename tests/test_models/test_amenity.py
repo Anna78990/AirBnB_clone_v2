@@ -49,24 +49,6 @@ class TestAmenity(unittest.TestCase):
         a = Amenity()
         self.assertEqual(type(a.id), type("a"))
 
-    def test_created_at(self):
-        """
-        test for created_at attribute of Amenity
-        """
-        a = Amenity()
-        d = datetime.now()
-        self.assertEqual(str(a.created_at)[0:-10],
-                         d.strftime('%Y-%m-%d %H:%M'))
-
-    def test_updated_at(self):
-        """
-        test for updated_at attribute of Amenity
-        """
-        a = Amenity()
-        d = datetime.now()
-        self.assertEqual(str(a.updated_at)[0:-10],
-                         d.strftime('%Y-%m-%d %H:%M'))
-
     def test_to_dict(self):
         """
         test for method to_dict of Amenity
