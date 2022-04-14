@@ -15,22 +15,6 @@ class TestBaseModel(unittest.TestCase):
         b = BaseModel()
         self.assertEqual(type(b.id), type("a"))
 
-    def test_created_at(self):
-        """test for created_at attribute of BaseModel
-        """
-        b = BaseModel()
-        d = datetime.now()
-        dst = d.strftime('%Y-%m-%d %H:%M')
-        self.assertEqual(str(b.created_at)[0:-10], dst)
-
-    def test_updated_at(self):
-        """test for updated_at attribute of BaseModel
-        """
-        b = BaseModel()
-        d = datetime.now()
-        dst = d.strftime('%Y-%m-%d %H:%M')
-        self.assertEqual(str(b.updated_at)[0:-10], dst)
-
     def test_name(self):
         """test for name attribute of BaseModel
         """
