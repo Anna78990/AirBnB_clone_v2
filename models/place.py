@@ -26,6 +26,7 @@ class Place(BaseModel, Base):
         - latitude (float): latitude of the place
         - longitude (float): longitude of the place
         - amenity_ids (list): list of amenity's ids
+        - reviews (relationship): relationship between Place and Review classes
         """
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -39,6 +40,7 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    reviews = relationship("Review", backref="place", cascade="delete")
 
 
     metadata = Base.metadata
