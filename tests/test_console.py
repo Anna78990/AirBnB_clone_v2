@@ -20,6 +20,7 @@ class TestFileStorage(unittest.TestCase):
         """
         con = console()
         arg = 'State name="Arizona"'
+        con.do_create(arg)
         with open('file.json') as f:
             contents = f.read()
         f.close()
