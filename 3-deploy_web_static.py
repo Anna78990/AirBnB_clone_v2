@@ -18,6 +18,7 @@ def do_pack():
     except Error:
         return None
 
+
 def do_deploy(archive_path):
     """ generates a .tgz archive from the contents of the web_static """
     if exists(archive_path) is False:
@@ -40,6 +41,7 @@ def do_deploy(archive_path):
 
     except Exception:
         return False
+
 
 def deploy():
     """ creates and distributes an archive to your web servers """
