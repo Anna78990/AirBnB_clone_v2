@@ -38,7 +38,9 @@ class DBStorage:
     def all(self, cls=None):
         """Return a dictionary of objects """
         if cls is not None:
-            objects = self.__session.query(self.classes()[cls])
+            if type(cls) == str:
+                cls = eval(cls)
+            objects = self.__session.query(cls)
         else:
             objects = self.__session.query(User).all()
             objects += self.__session.query(State).all()
