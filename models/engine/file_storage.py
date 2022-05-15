@@ -56,3 +56,7 @@ class FileStorage:
                 if self.__objects[k] == obj:
                     stk = k
             self.__objects.pop(stk)
+
+    def close(self):
+        """ call reload method """
+        self.reload()
