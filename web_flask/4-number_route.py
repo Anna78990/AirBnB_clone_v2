@@ -32,14 +32,10 @@ def show_your_text_python(path="is_cool"):
     return 'Python %s' % path
 
 
-@app.route('/number', strict_slashes=False)
-@app.route('/number/<path>', strict_slashes=False)
+@app.route('/number/<int:path>', strict_slashes=False)
 def show_your_text_number(path):
     """ print 'path' is a number """
-    if path.isdigit():
-        return '{} is a number'.format(path)
-    else:
-        abort(404)
+    return '{} is a number'.format(path)
 
 
 if __name__ == '__main__':
