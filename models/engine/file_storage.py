@@ -20,11 +20,8 @@ class FileStorage:
         if cls is None:
             return self.__objects
         else:
-            new_objects = {}
-            for k, v in self.__objects.items():
-                if k[0:5] == cls.__name__:
-                    new_objects[k] = v
-            return new_objects
+            return {key: obj for (key, obj) in self.__objects.items()
+                    if isinstance(obj, cls)}
 
     def new(self, obj):
         """Set in __objects the obj with key <obj class name>.id"""
