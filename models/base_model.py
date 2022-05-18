@@ -42,8 +42,10 @@ class BaseModel:
 
     def __str__(self):
         """Return a representation of a BaseModel instance in a string"""
+        copy_dic = self.__dict__.copy()
+        copy_dic.pop('_sa_instance_state')
         clsname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clsname, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(clsname, self.id, copy_dic)
 
     def to_dict(self):
         """Return a dictionary containing all keys/values of __dict__"""
